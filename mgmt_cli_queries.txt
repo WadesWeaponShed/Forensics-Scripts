@@ -1,0 +1,1 @@
+.tasks[]|."task-details"[]|.changes[]|"name" + ":" + .session."user-name" + " " + "date" + " " + .session."session-name"
