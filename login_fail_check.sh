@@ -1,16 +1,16 @@
 #!/bin/bash
 
-file="$1"
+file="/var/log"
 
 # Input log file
-cat $file/secure* |grep Failed >log.log
+cat $file/secure* |grep -w "Failed" >log.log
 logfile="log.log"
 
 # Extract hostname from the log file
 hostname=$(awk '{print $5; exit}' "$logfile")
 
 # Output CSV file with hostname in the filename
-csvfile="${hostname}_failed_login.csv"
+csvfile="${hostname}_FAILED_login.csv"
 
 
 # Add header row
@@ -21,8 +21,8 @@ awk '{
     date=$1 " " $2 " " $3
     time=$4
     host=$5
-    user=$10
-    ip=$12
+    user=$12
+    ip=$14
     printf "%s,%s,%s,%s,%s\n", date, time, host, user, ip
 }' "$logfile" > "$csvfile"
 
